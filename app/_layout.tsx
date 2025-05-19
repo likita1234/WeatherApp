@@ -7,7 +7,7 @@ const Layout = () => {
       <StatusBar style="auto" />
       <Stack
         screenOptions={{
-          headerShown: true,
+          headerShown: false,
         }}
       />
     </SafeAreaView>

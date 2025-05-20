@@ -1,12 +1,15 @@
 import { Text, View, StyleSheet } from "react-native";
-import { HomeScreen } from "./screens/HomeScreen";
+import HomeScreen from "./screens/HomeScreen";
+import WeatherProvider from "./features/weather/context/WeatherContext";
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Weather App</Text>
-      <HomeScreen />
-    </View>
+    <WeatherProvider>
+      <View style={styles.container}>
+        <Text style={styles.title}>Weather App</Text>
+        <HomeScreen />
+      </View>
+    </WeatherProvider>
   );
 };
 

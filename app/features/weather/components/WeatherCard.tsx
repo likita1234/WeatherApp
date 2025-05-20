@@ -10,19 +10,23 @@ type Props = {
   icon: string;
 };
 
-export const WeatherCard = () => {
+const WeatherCard = ({ city, temperature, condition, icon }: Props) => {
   return (
     <View style={styles.card}>
-      <Text style={styles.city}>{"London"}</Text>
+      <Text style={styles.city}>{city}</Text>
       <Image
-        source={require("../../../assets/images/sunImg.jpg")}
+        source={
+          icon ? { uri: icon } : require("../../../assets/images/sunImg.jpg")
+        }
         style={styles.icon}
       />
-      <Text style={styles.temp}>{40}°C</Text>
-      <Text style={styles.condition}>{"Hot"}</Text>
+      <Text style={styles.temp}>{temperature}°C</Text>
+      <Text style={styles.condition}>{condition}</Text>
     </View>
   );
 };
+
+export default WeatherCard;
 
 const styles = StyleSheet.create({
   card: {

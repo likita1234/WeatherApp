@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "https://api.weatherapi.com/v1/current.json";
+const WEATHER_URL = "https://api.weatherapi.com/v1/current.json";
+const SEARCH_URL = "https://api.weatherapi.com/v1/search.json"
 const API_KEY = "0893809c273c4ad4ae0211233251905";
 
 
@@ -74,3 +75,69 @@ export const fetchWeather = async (city: string) => {
       throw new Error("Failed to fetch weather");
     }
   };
+
+export const fetchLocations = async(city:string)=>{
+  try {
+      // const response = await axios.get(SEARCH_URL, {
+      //   params: {
+      //     key: API_KEY,
+      //     q: city,
+      //   },
+      // });
+      // const data = response.data;
+      // return data;
+      const data =[
+  {
+    "country": "Singapore",
+    "id": 2285382,
+    "lat": 1.29,
+    "lon": 103.86,
+    "name": "Singapore",
+    "region": "",
+    "url": "singapore-singapore"
+  },
+  {
+    "country": "Indonesia",
+    "id": 3024254,
+    "lat": -8.11,
+    "lon": 115.09,
+    "name": "Singaraja",
+    "region": "Bali",
+    "url": "singaraja-bali-indonesia"
+  },
+  {
+    "country": "India",
+    "id": 3333141,
+    "lat": 24.2,
+    "lon": 82.67,
+    "name": "Singarauli",
+    "region": "Madhya Pradesh",
+    "url": "singarauli-madhya-pradesh-india"
+  },
+  {
+    "country": "Tanzania",
+    "id": 2488971,
+    "lat": -4.82,
+    "lon": 34.75,
+    "name": "Singida",
+    "region": "Singida",
+    "url": "singida-singida-tanzania"
+  },
+  {
+    "country": "Indonesia",
+    "id": 2929934,
+    "lat": -7.17,
+    "lon": 112.66,
+    "name": "Singosari",
+    "region": "East Java",
+    "url": "singosari-east-java-indonesia"
+  }
+
+]
+  return data;
+    } catch (error: any) {
+      if (error.response && error.response.status === 400) {
+        throw new Error("City not found");
+      }
+    }
+      };

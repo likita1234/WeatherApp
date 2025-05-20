@@ -8,6 +8,8 @@ import { debounce } from "lodash";
 import { fetchLocations } from "../../services/WeatherServices";
 import LocationsList from "../features/weather/components/LocationsList";
 import { useRouter } from "expo-router";
+import ThemeToggle from "../components/ThemeToggle";
+import { useTheme } from "../../theme/ThemeContext";
 
 const HomeScreen = () => {
   const router = useRouter();
@@ -17,6 +19,8 @@ const HomeScreen = () => {
 
   const { weather, error } = useContext(WeatherContext);
   const { getWeather, loading } = useWeather();
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
 
   const handleLocation = (loc: { name: string }) => {
     setLocations([]);
@@ -36,7 +40,16 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: isDark ? "#121212" : "#fff" },
+      ]}
+    >
+      <Text style={[styles.title, isDark && { color: "#fff" }]}>
+        Weather App
+      </Text>
+      <ThemeToggle />
       {error && <Text style={styles.error}>{error}</Text>}
       {weather && <WeatherCard {...weather} />}
       {loading ? (
@@ -68,10 +81,14 @@ const HomeScreen = () => {
 export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    marginTop: 20,
-    justifyContent: "center",
-    alignItems: "center",
+    flex: 1,
+    paddingTop: 20,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "700",
+    marginBottom: 20,
+    textAlign: "center",
   },
   subContainer: {
     flexDirection: "row",

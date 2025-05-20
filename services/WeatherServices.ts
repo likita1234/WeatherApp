@@ -7,7 +7,7 @@ const API_KEY = "0893809c273c4ad4ae0211233251905";
 
 export const fetchWeather = async (city: string) => {
     try {
-      // const response = await axios.get(BASE_URL, {
+      // const response = await axios.get(WEATHER_URL, {
       //   params: {
       //     key: API_KEY,
       //     q: city,
@@ -78,12 +78,12 @@ export const fetchWeather = async (city: string) => {
 
 export const fetchLocations = async(city:string)=>{
   try {
-      // const response = await axios.get(SEARCH_URL, {
-      //   params: {
-      //     key: API_KEY,
-      //     q: city,
-      //   },
-      // });
+      const response = await axios.get(SEARCH_URL, {
+        params: {
+          key: API_KEY,
+          q: city,
+        },
+      });
       // const data = response.data;
       // return data;
       const data =[

@@ -5,12 +5,15 @@ const SearchBar = ({ showSearchBar, setShowSearchBar, handleDebounce }) => {
   return (
     <View style={{ alignItems: "center" }}>
       {showSearchBar ? (
+        <>
         <TextInput
           autoFocus={true}
           onChangeText={handleDebounce}
           placeholder="Search City"
           style={styles.input}
         />
+        
+        </>
       ) : (
         <TouchableOpacity
           onPress={() => {

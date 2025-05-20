@@ -1,31 +1,15 @@
-import { Text, View, StyleSheet } from "react-native";
 import HomeScreen from "./screens/HomeScreen";
 import WeatherProvider from "./features/weather/context/WeatherContext";
+import { ThemeProvider } from "../theme/ThemeContext";
 
 const App = () => {
   return (
-    <WeatherProvider>
-      <View style={styles.container}>
-        <Text style={styles.title}>Weather App</Text>
+    <ThemeProvider>
+      <WeatherProvider>
         <HomeScreen />
-      </View>
-    </WeatherProvider>
+      </WeatherProvider>
+    </ThemeProvider>
   );
 };
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 20,
-    paddingHorizontal: 20,
-    backgroundColor: "#fff",
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "700",
-    marginBottom: 20,
-    textAlign: "center",
-  },
-});

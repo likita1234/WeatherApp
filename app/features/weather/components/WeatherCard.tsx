@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
+import { useTheme } from "../../../../theme/ThemeContext";
 
 const { width } = Dimensions.get("window");
 
@@ -11,17 +12,23 @@ type Props = {
 };
 
 const WeatherCard = ({ city, temperature, condition, icon }: Props) => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   return (
     <View style={styles.card}>
-      <Text style={styles.city}>{city}</Text>
+      <Text style={[styles.city, isDark && { color: "#fff" }]}>{city}</Text>
       <Image
         source={
           icon ? { uri: icon } : require("../../../assets/images/sunImg.jpg")
         }
         style={styles.icon}
       />
-      <Text style={styles.temp}>{temperature}°C</Text>
-      <Text style={styles.condition}>{condition}</Text>
+      <Text style={[styles.temp, isDark && { color: "#fff" }]}>
+        {temperature}°C
+      </Text>
+      <Text style={[styles.condition, isDark && { color: "#fff" }]}>
+        {condition}
+      </Text>
     </View>
   );
 };

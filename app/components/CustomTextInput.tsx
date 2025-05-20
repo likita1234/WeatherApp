@@ -4,7 +4,7 @@ const CustomTextInput = ({ placeholder, value, onChange }) => {
   return (
     <TextInput
       style={styles.input}
-      placeholder={placeholder ? placeholder : "Enter  name"}
+      placeholder={placeholder ? placeholder : "Enter name"}
       value={value}
       onChangeText={onChange}
     />

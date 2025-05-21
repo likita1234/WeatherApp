@@ -1,3 +1,5 @@
+import React from "react";
+
 import HomeScreen from "@screens/HomeScreen";
 import WeatherProvider from "@features/weather/context/WeatherContext";
 import { ThemeProvider } from "@theme/ThemeContext";

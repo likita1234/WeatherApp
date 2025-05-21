@@ -1,5 +1,7 @@
+import React from "react";
 import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import PropTypes from "prop-types";
 
 const SearchBar = ({ showSearchBar, setShowSearchBar, handleDebounce }) => {
   return (
@@ -26,6 +28,12 @@ const SearchBar = ({ showSearchBar, setShowSearchBar, handleDebounce }) => {
 };
 
 export default SearchBar;
+
+SearchBar.propTypes = {
+  showSearchBar: PropTypes.bool,
+  setShowSearchBar: PropTypes.func,
+  handleDebounce: PropTypes.func,
+};
 
 const styles = StyleSheet.create({
   input: {

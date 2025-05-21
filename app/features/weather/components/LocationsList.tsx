@@ -1,3 +1,4 @@
+import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import {
   FlatList,
@@ -6,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import PropTypes from "prop-types";
 
 const LocationList = ({ locations, handleLocation }) => {
   return (
@@ -31,6 +33,11 @@ const LocationList = ({ locations, handleLocation }) => {
 };
 
 export default LocationList;
+
+LocationList.propTypes = {
+  locations: PropTypes.array,
+  handleLocation: PropTypes.func,
+};
 
 const styles = StyleSheet.create({
   container: {

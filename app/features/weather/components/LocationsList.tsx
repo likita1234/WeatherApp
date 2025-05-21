@@ -41,7 +41,7 @@ LocationList.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    width: "90%",
     paddingHorizontal: 16,
     top: 45,
     backgroundColor: "#fff",
@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
   locationItem: {
     flexDirection: "row",
     alignItems: "center",
-    // backgroundColor: "#1e1e1e",
     padding: 12,
     marginBottom: 12,
     borderRadius: 10,

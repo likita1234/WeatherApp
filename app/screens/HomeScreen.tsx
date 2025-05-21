@@ -17,13 +17,14 @@ const HomeScreen = () => {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [locations, setLocations] = useState([]);
   const [info, setInfo] = useState("");
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [cityName, setCityName] = useState("");
 
   const { weather, error } = useContext(WeatherContext);
   const { getWeather, loading } = useWeather();
   const { theme } = useTheme();
 
   const isDark = theme === "dark";
-  const [cityName, setCityName] = useState("");
 
   const handleLocation = (loc: { name: string }) => {
     setLocations([]);
@@ -38,6 +39,7 @@ const HomeScreen = () => {
         fetchLocations(value).then((data: Location[]) => {
           setLocations(data);
           setInfo("");
+          setDropdownVisible(true);
         });
       } else {
         setInfo("Please enter at least 3 characters");
@@ -48,6 +50,11 @@ const HomeScreen = () => {
   };
 
   const handleDebounce = useCallback(debounce(handleSearch, 500), []);
+
+  const handleTextChange = (value: string) => {
+    setCityName(value);
+    handleDebounce(value);
+  };
 
   return (
     <View
@@ -65,18 +72,18 @@ const HomeScreen = () => {
       {loading ? (
         <ActivityIndicator />
       ) : (
-        <View
-          style={{
-            margin: 30,
-          }}
-        >
-          <SearchBar
-            showSearchBar={showSearchBar}
-            setShowSearchBar={setShowSearchBar}
-            handleDebounce={handleDebounce}
-          />
+        <View style={styles.subContainer}>
+          <View style={styles.searchContainer}>
+            <SearchBar
+              showSearchBar={showSearchBar}
+              setShowSearchBar={setShowSearchBar}
+              handleChange={handleTextChange}
+              value={cityName}
+              clearSearchValue={() => setCityName("")}
+            />
+          </View>
           {info && <Text>{info}</Text>}
-          {cityName.length > 2 && locations.length > 0 && (
+          {cityName.length > 2 && locations.length > 0 && isDropdownVisible && (
             <LocationsList
               locations={locations}
               handleLocation={handleLocation}
@@ -101,7 +108,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   subContainer: {
-    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
   },
   input: {
     borderWidth: 1,
@@ -111,5 +119,13 @@ const styles = StyleSheet.create({
   error: {
     color: "red",
     marginTop: 10,
+  },
+  searchContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  clearButton: {
+    paddingHorizontal: 10,
+    paddingVertical: 12,
   },
 });

@@ -1,6 +1,14 @@
 {
   "compilerOptions": {
-      "types": ["expo-router"]
+      "types": ["expo-router"],
+      "baseUrl": "./",
+      "paths": {
+        "@components/*" : ["app/components/*"],
+        "@features/*" : ["app/features/*"],
+        "@screens/*" : ["app/screens/*"], 
+        "@services/*" : ["services/*"], 
+        "@theme/*" : ["theme/*"], 
+      }
   },
   "extends": "expo/tsconfig.base"
 }

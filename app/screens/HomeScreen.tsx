@@ -1,15 +1,17 @@
 import React, { useCallback, useContext, useState } from "react";
 import { ActivityIndicator, Text, View, StyleSheet } from "react-native";
-import WeatherCard from "../features/weather/components/WeatherCard";
-import useWeather from "../features/weather/hooks/useWeather";
-import { WeatherContext } from "../features/weather/context/WeatherContext";
-import SearchBar from "../features/weather/components/SearchBar";
 import { debounce } from "lodash";
-import { fetchLocations } from "../../services/WeatherServices";
-import LocationsList from "../features/weather/components/LocationsList";
 import { useRouter } from "expo-router";
-import ThemeToggle from "../components/ThemeToggle";
-import { useTheme } from "../../theme/ThemeContext";
+
+import ThemeToggle from "@components/ThemeToggle";
+import SearchBar from "@features/weather/components/SearchBar";
+import WeatherCard from "@features/weather/components/WeatherCard";
+import LocationsList from "@features/weather/components/LocationsList";
+import { WeatherContext } from "@features/weather/context/WeatherContext";
+
+import useWeather from "@features/weather/hooks/useWeather";
+import { fetchLocations } from "@services/WeatherServices";
+import { useTheme } from "@theme/ThemeContext";
 
 const HomeScreen = () => {
   const router = useRouter();

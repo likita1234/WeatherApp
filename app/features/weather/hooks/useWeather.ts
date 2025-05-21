@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
-import { fetchWeather } from "../../../../services/WeatherServices";
-import { WeatherContext } from "../context/WeatherContext";
+import { fetchWeather } from "@services/WeatherServices";
+import { WeatherContext } from "@features/weather/context/WeatherContext";
 
 const useWeather = () => {
   const { setWeather, setError } = useContext(WeatherContext);

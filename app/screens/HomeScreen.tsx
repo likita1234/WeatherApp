@@ -1,7 +1,6 @@
 import React, { useCallback, useContext, useState } from "react";
 import { ActivityIndicator, Text, View, StyleSheet } from "react-native";
 import { debounce } from "lodash";
-import { useRouter } from "expo-router";
 
 import ThemeToggle from "@components/ThemeToggle";
 import SearchBar from "@features/weather/components/SearchBar";
@@ -12,10 +11,9 @@ import { WeatherContext } from "@features/weather/context/WeatherContext";
 import useWeather from "@features/weather/hooks/useWeather";
 import { fetchLocations } from "@services/WeatherServices";
 import { useTheme } from "@theme/ThemeContext";
+import { Location } from "../types/location";
 
 const HomeScreen = () => {
-  const router = useRouter();
-  const [city, setCity] = useState("");
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [locations, setLocations] = useState([]);
   const [info, setInfo] = useState("");
@@ -23,7 +21,9 @@ const HomeScreen = () => {
   const { weather, error } = useContext(WeatherContext);
   const { getWeather, loading } = useWeather();
   const { theme } = useTheme();
+
   const isDark = theme === "dark";
+  const [cityName, setCityName] = useState("");
 
   const handleLocation = (loc: { name: string }) => {
     setLocations([]);
@@ -31,12 +31,17 @@ const HomeScreen = () => {
     getWeather(loc.name);
   };
 
-  const handleSearch = (value: string) => {
+  const handleSearch = (value: string): void => {
+    setCityName(value);
     if (value) {
-      value.length > 2
-        ? fetchLocations(value).then((data) => setLocations(data)) &&
-          setInfo("")
-        : setInfo("Please enter atleast 3 characters");
+      if (value.length > 2) {
+        fetchLocations(value).then((data: Location[]) => {
+          setLocations(data);
+          setInfo("");
+        });
+      } else {
+        setInfo("Please enter at least 3 characters");
+      }
     } else {
       setInfo("");
     }
@@ -71,7 +76,7 @@ const HomeScreen = () => {
             handleDebounce={handleDebounce}
           />
           {info && <Text>{info}</Text>}
-          {locations.length > 0 && showSearchBar && (
+          {cityName.length > 2 && locations.length > 0 && (
             <LocationsList
               locations={locations}
               handleLocation={handleLocation}

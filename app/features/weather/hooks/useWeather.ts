@@ -1,6 +1,6 @@
-import { useContext, useState } from 'react';
-import { fetchWeather} from '../../../../services/WeatherServices';
-import { WeatherContext } from '../context/WeatherContext';
+import { useContext, useState } from "react";
+import { fetchWeather } from "../../../../services/WeatherServices";
+import { WeatherContext } from "../context/WeatherContext";
 
 const useWeather = () => {
   const { setWeather, setError } = useContext(WeatherContext);
@@ -13,7 +13,7 @@ const useWeather = () => {
       setWeather(data);
       setError(null);
     } catch {
-      setError('City not found');
+      setError("City not found");
     } finally {
       setLoading(false);
     }

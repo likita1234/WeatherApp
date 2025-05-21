@@ -16,6 +16,7 @@ const HomeScreen = () => {
   const [city, setCity] = useState("");
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [locations, setLocations] = useState([]);
+  const [info, setInfo] = useState("");
 
   const { weather, error } = useContext(WeatherContext);
   const { getWeather, loading } = useWeather();
@@ -29,15 +30,17 @@ const HomeScreen = () => {
   };
 
   const handleSearch = (value: string) => {
-    if (value.length > 2) {
-      fetchLocations(value).then((data) => setLocations(data));
+    if (value) {
+      value.length > 2
+        ? fetchLocations(value).then((data) => setLocations(data)) &&
+          setInfo("")
+        : setInfo("Please enter atleast 3 characters");
+    } else {
+      setInfo("");
     }
   };
-  const handleDebounce = useCallback(debounce(handleSearch, 500), []);
 
-  const onButtonPress = () => {
-    getWeather(city);
-  };
+  const handleDebounce = useCallback(debounce(handleSearch, 500), []);
 
   return (
     <View
@@ -57,8 +60,7 @@ const HomeScreen = () => {
       ) : (
         <View
           style={{
-            width: "100%",
-            marginTop: 30,
+            margin: 30,
           }}
         >
           <SearchBar
@@ -66,6 +68,7 @@ const HomeScreen = () => {
             setShowSearchBar={setShowSearchBar}
             handleDebounce={handleDebounce}
           />
+          {info && <Text>{info}</Text>}
           {locations.length > 0 && showSearchBar && (
             <LocationsList
               locations={locations}

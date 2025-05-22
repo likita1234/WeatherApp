@@ -5,18 +5,20 @@ import { Weather } from "@customTypes/weather";
 
 const { width } = Dimensions.get("window");
 
-const WeatherCard = ({ city, temperature, condition, icon }: Weather) => {
+const WeatherCard = (weather: Weather) => {
   const { theme } = useTheme();
   const isDark = theme === "dark";
   return (
     <View style={styles.card}>
-      <Text style={[styles.city, isDark && { color: "#fff" }]}>{city}</Text>
-      <Image source={{ uri: icon }} style={styles.icon} />
+      <Text style={[styles.city, isDark && { color: "#fff" }]}>
+        {weather.city}
+      </Text>
+      <Image source={{ uri: weather.icon }} style={styles.icon} />
       <Text style={[styles.temp, isDark && { color: "#fff" }]}>
-        {temperature}°C
+        {weather.temperature}°C
       </Text>
       <Text style={[styles.condition, isDark && { color: "#fff" }]}>
-        {condition}
+        {weather.condition}
       </Text>
     </View>
   );

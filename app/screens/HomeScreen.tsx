@@ -107,11 +107,9 @@ const HomeScreen = () => {
           />
         )}
 
-        {loading && !weather ? (
-          <ActivityIndicator />
-        ) : (
-          <WeatherCard {...weather} />
-        )}
+        {loading && <ActivityIndicator />}
+
+        {weather && <WeatherCard {...weather} />}
       </View>
     </TouchableWithoutFeedback>
   );

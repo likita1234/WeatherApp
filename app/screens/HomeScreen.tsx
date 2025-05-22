@@ -26,7 +26,7 @@ const HomeScreen = () => {
   const [cityName, setCityName] = useState("");
 
   const { weather, error } = useContext(WeatherContext);
-  const [info, setInfo] = useState(error ? error : "");
+  const [info, setInfo] = useState();
   const { getWeather, loading } = useWeather();
   const { isDark } = useTheme();
 
@@ -98,6 +98,7 @@ const HomeScreen = () => {
         </View>
 
         {info && <Text style={styles.error}>{info}</Text>}
+        {error && <Text style={styles.error}>{error}</Text>}
         {cityName.length > 2 && locations.length > 0 && isDropdownVisible && (
           <LocationsList
             locations={locations}
@@ -105,9 +106,11 @@ const HomeScreen = () => {
           />
         )}
 
-        {loading && <ActivityIndicator />}
-
-        {weather && <WeatherCard {...weather} />}
+        {loading ? (
+          <ActivityIndicator />
+        ) : (
+          weather && <WeatherCard {...weather} />
+        )}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -137,6 +140,7 @@ const styles = StyleSheet.create({
   error: {
     color: "red",
     marginLeft: 20,
+    marginTop: 10,
   },
   searchContainer: {
     marginTop: 10,

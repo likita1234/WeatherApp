@@ -28,9 +28,7 @@ const HomeScreen = () => {
   const { weather, error } = useContext(WeatherContext);
   const [info, setInfo] = useState(error ? error : "");
   const { getWeather, loading } = useWeather();
-  const { theme } = useTheme();
-
-  const isDark = theme === "dark";
+  const { isDark } = useTheme();
 
   const handleLocation = (loc: { name: string }) => {
     setCityName(loc.name);

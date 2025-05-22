@@ -44,20 +44,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   city: {
-    fontSize: 24,
+    fontSize: 40,
     fontWeight: "bold",
     marginBottom: 10,
   },
   icon: {
-    width: 80,
-    height: 80,
+    width: 120,
+    height: 120,
   },
   temp: {
-    fontSize: 30,
+    fontSize: 35,
     fontWeight: "600",
   },
   condition: {
-    fontSize: 20,
+    fontSize: 35,
     marginTop: 10,
     fontStyle: "italic",
   },

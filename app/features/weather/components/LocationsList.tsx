@@ -10,25 +10,27 @@ import {
 import PropTypes from "prop-types";
 
 const LocationList = ({ locations, handleLocation }) => {
+
+
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={locations}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.locationItem}
-            onPress={() => handleLocation(item)}
-          >
-            <FontAwesome name="map-marker" size={20} color="#ff6347" />
-            <View style={styles.textContainer}>
-              <Text style={styles.cityText}>{item?.name}</Text>
-              <Text style={styles.countryText}>{item?.country}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
-    </View>
+        <View style={styles.container}>
+          <FlatList
+            data={locations}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.locationItem}
+                onPress={() => handleLocation(item)}
+              >
+                <FontAwesome name="map-marker" size={20} color="#ff6347" />
+                <View style={styles.textContainer}>
+                  <Text style={styles.cityText}>{item?.name}</Text>
+                  <Text style={styles.countryText}>{item?.country}</Text>
+                </View>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
   );
 };
 
@@ -42,8 +44,7 @@ LocationList.propTypes = {
 const styles = StyleSheet.create({
   container: {
     width: "90%",
-    paddingHorizontal: 16,
-    top: 45,
+    top: 140,
     backgroundColor: "#fff",
     position: "absolute",
     zIndex: 10,
@@ -52,6 +53,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 5,
+    marginLeft: 10,
+    marginRight: 10,
   },
   locationItem: {
     flexDirection: "row",

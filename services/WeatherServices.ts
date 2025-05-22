@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const WEATHER_URL = "https://api.weatherapi.com/v1/current.json";
-const SEARCH_URL = "https://api.weatherapi.com/v1/search.json";
-const API_KEY = "0893809c273c4ad4ae0211233251905";
+const WEATHER_URL = `${process.env.EXPO_PUBLIC_API_URL}current.json`;
+const SEARCH_URL = `${process.env.EXPO_PUBLIC_API_URL}search.json`;
+const API_KEY = process.env.EXPO_PUBLIC_WEATHER_API_KEY;
 
 export const fetchWeather = async (city: string) => {
   try {

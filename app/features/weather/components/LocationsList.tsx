@@ -7,39 +7,36 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import PropTypes from "prop-types";
 
-const LocationList = ({ locations, handleLocation }) => {
+import { LocationListProps } from "@customTypes/location";
 
-
+const LocationList: React.FC<LocationListProps> = ({
+  locations,
+  handleLocation,
+}) => {
   return (
-        <View style={styles.container}>
-          <FlatList
-            data={locations}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.locationItem}
-                onPress={() => handleLocation(item)}
-              >
-                <FontAwesome name="map-marker" size={20} color="#ff6347" />
-                <View style={styles.textContainer}>
-                  <Text style={styles.cityText}>{item?.name}</Text>
-                  <Text style={styles.countryText}>{item?.country}</Text>
-                </View>
-              </TouchableOpacity>
-            )}
-          />
-        </View>
+    <View style={styles.container}>
+      <FlatList
+        data={locations}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={styles.locationItem}
+            onPress={() => handleLocation(item)}
+          >
+            <FontAwesome name="map-marker" size={20} color="#ff6347" />
+            <View style={styles.textContainer}>
+              <Text style={styles.cityText}>{item?.name}</Text>
+              <Text style={styles.countryText}>{item?.country}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      />
+    </View>
   );
 };
 
 export default LocationList;
-
-LocationList.propTypes = {
-  locations: PropTypes.array,
-  handleLocation: PropTypes.func,
-};
 
 const styles = StyleSheet.create({
   container: {

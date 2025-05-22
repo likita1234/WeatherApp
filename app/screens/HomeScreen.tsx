@@ -1,9 +1,14 @@
 import React, { useCallback, useContext, useState } from "react";
-import { ActivityIndicator, Text, View, StyleSheet } from "react-native";
+import {
+  ActivityIndicator,
+  Text,
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { debounce } from "lodash";
 
 import ThemeToggle from "@components/ThemeToggle";
-import SearchBar from "@features/weather/components/SearchBar";
 import WeatherCard from "@features/weather/components/WeatherCard";
 import LocationsList from "@features/weather/components/LocationsList";
 import { WeatherContext } from "@features/weather/context/WeatherContext";
@@ -12,24 +17,28 @@ import useWeather from "@features/weather/hooks/useWeather";
 import { fetchLocations } from "@services/WeatherServices";
 import { useTheme } from "@theme/ThemeContext";
 import { Location } from "../types/location";
+import CustomTextInput from "@components/CustomTextInput";
+import CustomButton from "@components/CustomButton";
 
 const HomeScreen = () => {
-  const [showSearchBar, setShowSearchBar] = useState(false);
   const [locations, setLocations] = useState([]);
-  const [info, setInfo] = useState("");
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [cityName, setCityName] = useState("");
 
   const { weather, error } = useContext(WeatherContext);
+  const [info, setInfo] = useState(error ? error : "");
   const { getWeather, loading } = useWeather();
   const { theme } = useTheme();
 
   const isDark = theme === "dark";
 
   const handleLocation = (loc: { name: string }) => {
+    setCityName(loc.name);
     setLocations([]);
-    setShowSearchBar(false);
-    getWeather(loc.name);
+  };
+
+  const getWeatherData = () => {
+    getWeather(cityName);
   };
 
   const handleSearch = (value: string): void => {
@@ -56,42 +65,53 @@ const HomeScreen = () => {
     handleDebounce(value);
   };
 
+  const handleOutsidePress = () => {
+    if (isDropdownVisible) {
+      setDropdownVisible(false);
+    }
+  };
   return (
-    <View
-      style={[
-        styles.container,
-        { backgroundColor: isDark ? "#121212" : "#fff" },
-      ]}
-    >
-      <Text style={[styles.title, isDark && { color: "#fff" }]}>
-        Weather App
-      </Text>
-      <ThemeToggle />
-      {error && <Text style={styles.error}>{error}</Text>}
-      {weather && <WeatherCard {...weather} />}
-      {loading ? (
-        <ActivityIndicator />
-      ) : (
-        <View style={styles.subContainer}>
-          <View style={styles.searchContainer}>
-            <SearchBar
-              showSearchBar={showSearchBar}
-              setShowSearchBar={setShowSearchBar}
-              handleChange={handleTextChange}
-              value={cityName}
-              clearSearchValue={() => setCityName("")}
-            />
-          </View>
-          {info && <Text>{info}</Text>}
-          {cityName.length > 2 && locations.length > 0 && isDropdownVisible && (
-            <LocationsList
-              locations={locations}
-              handleLocation={handleLocation}
-            />
-          )}
+    <TouchableWithoutFeedback onPress={handleOutsidePress}>
+      <View
+        style={[
+          styles.container,
+          { backgroundColor: isDark ? "#121212" : "#FFFAFA" },
+        ]}
+      >
+        <Text style={[styles.title, isDark && { color: "#fff" }]}>
+          Weather App
+        </Text>
+
+        <ThemeToggle />
+
+        <View style={styles.searchContainer}>
+          <CustomTextInput
+            value={cityName}
+            onChange={handleTextChange}
+            placeholder="Search City"
+          />
+          <CustomButton
+            label="Get Weather"
+            onPress={getWeatherData}
+            disable={cityName.length <= 2}
+          />
         </View>
-      )}
-    </View>
+
+        {info && <Text style={styles.error}>{info}</Text>}
+        {cityName.length > 2 && locations.length > 0 && isDropdownVisible && (
+          <LocationsList
+            locations={locations}
+            handleLocation={handleLocation}
+          />
+        )}
+
+        {loading && !weather ? (
+          <ActivityIndicator />
+        ) : (
+          <WeatherCard {...weather} />
+        )}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -99,7 +119,8 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
+    backgroundColor: "yellow",
+    alignItems: "center",
   },
   title: {
     fontSize: 28,
@@ -118,9 +139,10 @@ const styles = StyleSheet.create({
   },
   error: {
     color: "red",
-    marginTop: 10,
+    marginLeft: 20,
   },
   searchContainer: {
+    marginTop: 10,
     flexDirection: "row",
     justifyContent: "center",
   },

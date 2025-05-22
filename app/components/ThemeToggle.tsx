@@ -16,7 +16,7 @@ const ThemeToggle = () => {
       <View style={styles.subContainer}>
         <View style={styles.iconContainer}>
           <FontAwesome
-            name={isDark ? "sun-o" : "moon-o"}
+            name={isDark ? "moon-o" : "sun-o"}
             size={20}
             color={isDark ? "orange" : "black"}
           />

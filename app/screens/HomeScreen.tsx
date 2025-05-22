@@ -17,7 +17,7 @@ import useWeather from "@features/weather/hooks/useWeather";
 import { fetchLocations } from "@services/WeatherServices";
 import { useTheme } from "@theme/ThemeContext";
 import { Location } from "../types/location";
-import CustomTextInput from "@components/CustomTextInput";
+import SearchTextInput from "@features/weather/components/SearchTextInput";
 import CustomButton from "@components/CustomButton";
 
 const HomeScreen = () => {
@@ -85,7 +85,7 @@ const HomeScreen = () => {
         <ThemeToggle />
 
         <View style={styles.searchContainer}>
-          <CustomTextInput
+          <SearchTextInput
             value={cityName}
             onChange={handleTextChange}
             placeholder="Search City"

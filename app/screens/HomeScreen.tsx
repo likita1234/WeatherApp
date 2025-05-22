@@ -26,7 +26,7 @@ const HomeScreen = () => {
   const [cityName, setCityName] = useState("");
 
   const { weather, error } = useContext(WeatherContext);
-  const [info, setInfo] = useState();
+  const [info, setInfo] = useState("");
   const { getWeather, loading } = useWeather();
   const { isDark } = useTheme();
 

@@ -16,7 +16,7 @@ import { WeatherContext } from "@features/weather/context/WeatherContext";
 import useWeather from "@features/weather/hooks/useWeather";
 import { fetchLocations } from "@services/WeatherServices";
 import { useTheme } from "@theme/ThemeContext";
-import { Location } from "app/types/location";
+import { Location } from "@customTypes/location";
 import SearchTextInput from "@features/weather/components/SearchTextInput";
 import CustomButton from "@components/CustomButton";
 

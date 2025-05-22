@@ -10,8 +10,10 @@ const useWeather = () => {
     setLoading(true);
     try {
       const data = await fetchWeather(city);
+      if(data){
       setWeather(data);
       setError(null);
+      }
     } catch {
       setError("City not found");
     } finally {

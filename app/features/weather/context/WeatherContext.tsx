@@ -1,12 +1,6 @@
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-type Weather = {
-  city: string;
-  temperature: number;
-  condition: string;
-  icon: string;
-};
+import { Weather } from "@customTypes/weather";
 
 type ContextType = {
   weather: Weather | null;

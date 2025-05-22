@@ -1,6 +1,14 @@
 {
   "compilerOptions": {
     "types": ["expo-router"],
+    "target": "esnext",
+    "module": "Node16",
+    "strict": true,
+    "jsx": "react",
+    "moduleResolution": "node16",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {
       "@components/*": ["app/components/*"],
@@ -8,7 +16,8 @@
       "@screens/*": ["app/screens/*"],
       "@services/*": ["services/*"],
       "@theme/*": ["theme/*"],
-      "@assets/*": ["app/assets/*"]
+      "@assets/*": ["app/assets/*"],
+      "@customTypes/*": ["types/*"]
     }
   },
   "extends": "expo/tsconfig.base"

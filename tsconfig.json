@@ -17,7 +17,7 @@
       "@services/*": ["services/*"],
       "@theme/*": ["theme/*"],
       "@assets/*": ["app/assets/*"],
-      "@customTypes/*": ["types/*"]
+      "@customTypes/*": ["app/types/*"]
     }
   },
   "extends": "expo/tsconfig.base"

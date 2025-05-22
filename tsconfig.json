@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["expo-router", "node"],
+    "types": ["expo-router", "node", "jest"],
     "target": "esnext",
     "module": "Node16",
     "strict": true,

@@ -9,6 +9,9 @@ const CustomTextInput = ({ placeholder, value, onChange }) => {
       placeholder={placeholder ? placeholder : "Enter name"}
       value={value}
       onChangeText={onChange}
+      autoCorrect={false}
+      autoComplete="off"
+      autoCapitalize="none"
     />
   );
 };

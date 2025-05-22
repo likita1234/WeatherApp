@@ -3,8 +3,3 @@ export interface Location {
   country: string;
   name: string;
 }
-
-export interface LocationListProps {
-  locations: Location[];
-  handleLocation: (location: Location) => void;
-}

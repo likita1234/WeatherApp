@@ -8,7 +8,12 @@ import {
   View,
 } from "react-native";
 
-import { LocationListProps } from "@customTypes/location";
+import { Location } from "@customTypes/location";
+
+interface LocationListProps {
+  locations: Location[];
+  handleLocation: (location: Location) => void;
+}
 
 const LocationList: React.FC<LocationListProps> = ({
   locations,

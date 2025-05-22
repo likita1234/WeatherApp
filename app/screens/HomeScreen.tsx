@@ -16,12 +16,12 @@ import { WeatherContext } from "@features/weather/context/WeatherContext";
 import useWeather from "@features/weather/hooks/useWeather";
 import { fetchLocations } from "@services/WeatherServices";
 import { useTheme } from "@theme/ThemeContext";
-import { Location } from "../types/location";
+import { Location } from "app/types/location";
 import SearchTextInput from "@features/weather/components/SearchTextInput";
 import CustomButton from "@components/CustomButton";
 
 const HomeScreen = () => {
-  const [locations, setLocations] = useState([]);
+  const [locations, setLocations] = useState<Location[]>([]);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [cityName, setCityName] = useState("");
 
@@ -45,10 +45,12 @@ const HomeScreen = () => {
     setCityName(value);
     if (value) {
       if (value.length > 2) {
-        fetchLocations(value).then((data: Location[]) => {
-          setLocations(data);
-          setInfo("");
-          setDropdownVisible(true);
+        fetchLocations(value).then((data: Location[] | undefined) => {
+          if (data) {
+            setLocations(data);
+            setInfo("");
+            setDropdownVisible(true);
+          }
         });
       } else {
         setInfo("Please enter at least 3 characters");

@@ -1,8 +1,17 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import PropTypes from "prop-types";
 
-const CustomButton = ({ label, onPress, disable }) => {
+interface CustomButtonProps {
+  label: string;
+  onPress: () => void;
+  disable: boolean;
+}
+
+const CustomButton: React.FC<CustomButtonProps> = ({
+  label,
+  onPress,
+  disable,
+}) => {
   return (
     <TouchableOpacity
       style={[
@@ -18,12 +27,6 @@ const CustomButton = ({ label, onPress, disable }) => {
 };
 
 export default CustomButton;
-
-CustomButton.propTypes = {
-  label: PropTypes.String,
-  onPress: PropTypes.func,
-  disable: PropTypes.bool,
-};
 
 const styles = StyleSheet.create({
   weatherButton: {

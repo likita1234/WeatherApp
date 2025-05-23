@@ -41,6 +41,14 @@ A responsive and theme-aware weather app built with **React Native**, **Expo**, 
 └── ...
 ```
 
+## Architecture Decision
+```
+I’ve built the weather app with a structure that makes it easy to grow and maintain over time. Everything is organized in a way that allows me to add new features or make changes easily.
+The data handling process related to the APIs is centralized in services.
+Reusable components are placed directly under the app folder, which can store all global UI components, whereas components related to specific features can be placed into their specific feature folder atm its weather here. Each feature holds its related components, context, and hooks which helps to avoid conflicts between multiple features when the app grows.
+This setup makes it simple to add future features, for example, we can add saved locations in the future. 
+```
+
 ## 🚀 Getting Started
 
 ### Prerequisites

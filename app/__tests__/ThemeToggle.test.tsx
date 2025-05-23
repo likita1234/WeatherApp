@@ -3,10 +3,9 @@ import { render, fireEvent, waitFor, act } from "@testing-library/react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as ReactNative from "react-native";
 
-import ThemeToggle from "../components/ThemeToggle"; // adjust path
+import ThemeToggle from "@components/ThemeToggle";
 import { ThemeProvider } from "@theme/ThemeContext";
 
-// Setup local storage mocking
 jest.mock("@react-native-async-storage/async-storage", () => ({
   getItem: jest.fn(),
   setItem: jest.fn(),

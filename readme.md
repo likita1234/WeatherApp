@@ -39,6 +39,7 @@ A responsive and theme-aware weather app built with **React Native**, **Expo**, 
 ├── context/              # ThemeContext and other providers
 ├── App.tsx              
 └── ...
+```
 
 ## 🚀 Getting Started
 
@@ -49,43 +50,43 @@ A responsive and theme-aware weather app built with **React Native**, **Expo**, 
 
 #### Setup
 1 Clone the repo:
-``
-git clone https://github.com/your-username/weather-app.git
+``` bash
+git clone https://github.com/likita1234/weather-app.git
 cd weather-app
-``
+```
 
 2 Clone the repo:
-``
+``` bash
 yarn install
 # or
 npm install
-``
+```
 
 3 Start the app:
-``
+``` bash
 npx expo start
-``
+```
 
 Open it:
-``
+```
 - On your mobile: scan the QR code using Expo Go
 - On emulator: press i for iOS or a for Android
-``
+```
 
 ## 🔌 API Configuration
 - This app uses a weather API (e.g. OpenWeatherMap).
 
 ### Create a .env file:
-``
+```
 WEATHER_API_KEY=your_api_key_here
-``
+```
 
 ## 🧪 Testing
 - Run the test suite using:
 
-``
+``` bash
 npm run test
-``
+```
 
 - The project uses:
 
@@ -94,8 +95,8 @@ npm run test
 
 ## 🎨 Formatting
 - Format code with Prettier:
-``
+``` bash
 yarn format
 # or
 npm run format
-``
+```

@@ -33,6 +33,7 @@ const SearchTextInput: React.FC<SearchTextInputProps> = ({
             onPress={handleClear}
             accessibilityLabel="Clear search button"
             accessibilityRole="button"
+            testID="clear-btn"
           >
             <FontAwesome
               name="times-circle"

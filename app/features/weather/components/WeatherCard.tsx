@@ -10,14 +10,24 @@ const WeatherCard = (weather: Weather) => {
   const isDark = theme === "dark";
   return (
     <View style={styles.card}>
-      <Text style={[styles.city, isDark && { color: "#fff" }]}>
+      <Text testID="city" style={[styles.city, isDark && { color: "#fff" }]}>
         {weather.city}
       </Text>
-      <Image source={{ uri: weather.icon }} style={styles.icon} />
-      <Text style={[styles.temp, isDark && { color: "#fff" }]}>
+      <Image
+        testID="weatherIcon"
+        source={{ uri: weather.icon }}
+        style={styles.icon}
+      />
+      <Text
+        testID="temperature"
+        style={[styles.temp, isDark && { color: "#fff" }]}
+      >
         {weather.temperature}°C
       </Text>
-      <Text style={[styles.condition, isDark && { color: "#fff" }]}>
+      <Text
+        testID="condition"
+        style={[styles.condition, isDark && { color: "#fff" }]}
+      >
         {weather.condition}
       </Text>
     </View>

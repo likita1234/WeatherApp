@@ -4,23 +4,11 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 interface CustomButtonProps {
   label: string;
   onPress: () => void;
-  disable: boolean;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({
-  label,
-  onPress,
-  disable,
-}) => {
+const CustomButton: React.FC<CustomButtonProps> = ({ label, onPress }) => {
   return (
-    <TouchableOpacity
-      style={[
-        styles.weatherButton,
-        { backgroundColor: disable ? "gray" : "#4a90e2" },
-      ]}
-      onPress={onPress}
-      disabled={disable}
-    >
+    <TouchableOpacity style={styles.weatherButton} onPress={onPress}>
       <Text style={styles.textStyle}>{label}</Text>
     </TouchableOpacity>
   );
@@ -43,6 +31,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     borderColor: "#ccc",
     alignItems: "center",
+    backgroundColor: "#4a90e2",
   },
   textStyle: {
     color: "#fff",

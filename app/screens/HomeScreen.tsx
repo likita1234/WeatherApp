@@ -1,39 +1,22 @@
 import React, { useCallback, useContext, useState } from "react";
-import {
-  ActivityIndicator,
-  Text,
-  View,
-  StyleSheet,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { ActivityIndicator, Text, View, StyleSheet } from "react-native";
 import { debounce } from "lodash";
 
 import ThemeToggle from "@components/ThemeToggle";
 import WeatherCard from "@features/weather/components/WeatherCard";
-import LocationsList from "@features/weather/components/LocationsList";
 import { WeatherContext } from "@features/weather/context/WeatherContext";
 
 import useWeather from "@features/weather/hooks/useWeather";
-import { fetchLocations } from "@services/WeatherServices";
 import { useTheme } from "@theme/ThemeContext";
-import { Location } from "@customTypes/location";
 import SearchTextInput from "@features/weather/components/SearchTextInput";
 import CustomButton from "@components/CustomButton";
 
 const HomeScreen = () => {
-  const [locations, setLocations] = useState<Location[]>([]);
-  const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [cityName, setCityName] = useState("");
 
   const { weather, error } = useContext(WeatherContext);
-  const [info, setInfo] = useState("");
   const { getWeather, loading } = useWeather();
   const { isDark } = useTheme();
-
-  const handleLocation = (loc: { name: string }) => {
-    setCityName(loc.name);
-    setLocations([]);
-  };
 
   const getWeatherData = () => {
     getWeather(cityName);
@@ -41,21 +24,6 @@ const HomeScreen = () => {
 
   const handleSearch = (value: string): void => {
     setCityName(value);
-    if (value) {
-      if (value.length > 2) {
-        fetchLocations(value).then((data: Location[] | undefined) => {
-          if (data) {
-            setLocations(data);
-            setInfo("");
-            setDropdownVisible(true);
-          }
-        });
-      } else {
-        setInfo("Please enter at least 3 characters");
-      }
-    } else {
-      setInfo("");
-    }
   };
 
   const handleDebounce = useCallback(debounce(handleSearch, 500), []);
@@ -65,54 +33,36 @@ const HomeScreen = () => {
     handleDebounce(value);
   };
 
-  const handleOutsidePress = () => {
-    if (isDropdownVisible) {
-      setDropdownVisible(false);
-    }
-  };
   return (
-    <TouchableWithoutFeedback onPress={handleOutsidePress}>
-      <View
-        style={[
-          styles.container,
-          { backgroundColor: isDark ? "#121212" : "#FFFAFA" },
-        ]}
-      >
-        <Text style={[styles.title, isDark && { color: "#fff" }]}>
-          Weather App
-        </Text>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: isDark ? "#121212" : "#FFFAFA" },
+      ]}
+    >
+      <Text style={[styles.title, isDark && { color: "#fff" }]}>
+        Weather App
+      </Text>
 
-        <ThemeToggle />
+      <ThemeToggle />
 
-        <View style={styles.searchContainer}>
-          <SearchTextInput
-            value={cityName}
-            onChange={handleTextChange}
-            placeholder="Search City"
-          />
-          <CustomButton
-            label="Get Weather"
-            onPress={getWeatherData}
-            disable={cityName.length <= 2}
-          />
-        </View>
-
-        {info && <Text style={styles.error}>{info}</Text>}
-        {error && <Text style={styles.error}>{error}</Text>}
-        {cityName.length > 2 && locations.length > 0 && isDropdownVisible && (
-          <LocationsList
-            locations={locations}
-            handleLocation={handleLocation}
-          />
-        )}
-
-        {loading ? (
-          <ActivityIndicator />
-        ) : (
-          weather && <WeatherCard {...weather} />
-        )}
+      <View style={styles.searchContainer}>
+        <SearchTextInput
+          value={cityName}
+          onChange={handleTextChange}
+          placeholder="Search City"
+        />
+        <CustomButton label="Get Weather" onPress={getWeatherData} />
       </View>
-    </TouchableWithoutFeedback>
+
+      {error && <Text style={styles.error}>{error}</Text>}
+
+      {loading ? (
+        <ActivityIndicator />
+      ) : (
+        weather && <WeatherCard {...weather} />
+      )}
+    </View>
   );
 };
 
@@ -126,6 +76,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "700",
     marginBottom: 20,
+    marginTop: 20,
     textAlign: "center",
   },
   subContainer: {

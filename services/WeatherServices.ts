@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const WEATHER_URL = `${process.env.EXPO_PUBLIC_API_URL}current.json`;
-const SEARCH_URL = `${process.env.EXPO_PUBLIC_API_URL}search.json`;
 const API_KEY = process.env.EXPO_PUBLIC_WEATHER_API_KEY;
 
 export const fetchWeather = async (city: string) => {
@@ -23,22 +22,6 @@ export const fetchWeather = async (city: string) => {
   } catch (error: unknown) {
     if (axios.isAxiosError(error) && error.response?.status === 400) {
       throw new Error("Failed to fetch weather");
-    }
-  }
-};
-
-export const fetchLocations = async (city: string) => {
-  try {
-    const response = await axios.get(SEARCH_URL, {
-      params: {
-        key: API_KEY,
-        q: city,
-      },
-    });
-    return response.data;
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response?.status === 400) {
-      throw new Error("City not found");
     }
   }
 };

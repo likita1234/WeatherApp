@@ -64,7 +64,7 @@ describe("ThemeToggle Component", () => {
       expect(getByRole("switch").props.value).toBe(false);
     });
 
-    act(() => {
+    await act(async () => {
       fireEvent(getByRole("switch"), "valueChange", true);
     });
 
@@ -73,7 +73,7 @@ describe("ThemeToggle Component", () => {
       expect(AsyncStorage.setItem).toHaveBeenCalledWith("currentTheme", "dark");
     });
 
-    act(() => {
+    await act(async () => {
       fireEvent(getByRole("switch"), "valueChange", false);
     });
 
